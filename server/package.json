@@ -8,7 +8,8 @@
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
     "lint:eslint": "eslint ./src --ext .js,.jsx,.ts,.tsx",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +22,7 @@
   },
   "devDependencies": {
     "eslint": "^8.9.0",
+    "husky": "^7.0.4",
     "nodemon": "^2.0.15"
   }
 }
