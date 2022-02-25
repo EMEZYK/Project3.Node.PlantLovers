@@ -1,7 +1,7 @@
 const Joi = require("joi-oid");
 Joi.objectId = require("joi-objectid")(Joi);
 
-const validateUser = (user) => {
+const validateCreateUser = (user) => {
   const schema = Joi.object({
     email: Joi.string()
       .min(6)
@@ -11,7 +11,7 @@ const validateUser = (user) => {
 
     password: Joi.string().min(6).max(255).required(),
 
-    isAdmin: Joi.boolean().required(),
+    confirmPassword: Joi.string().required().valid(Joi.ref("password")),
 
     phoneNumber: Joi.number().optional(),
 
