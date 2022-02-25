@@ -11,7 +11,7 @@
     "lint:eslint": "npm run prettier:write && npm run lint",
     "prettier:write": "prettier --write .",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky install",
+    "prepare": "cd .. && husky install server/.husky",
     "pretty-quick": "pretty-quick --staged"
   },
   "keywords": [],

@@ -2,5 +2,5 @@
 . "$(dirname "$0")/_/husky.sh"
 
 npm run lint:eslint
-npx pretty-quick --staged
+npm run pretty-quick
 
