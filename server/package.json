@@ -7,7 +7,9 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "lint:eslint": "eslint ./src --ext .js,.jsx,.ts,.tsx",
+    "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx --fix",
+    "lint:eslint": "npm run prettier:write && npm run lint",
+    "prettier:write": "prettier --write .",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky install"
   },
@@ -23,6 +25,9 @@
   },
   "devDependencies": {
     "eslint": "^8.9.0",
-    "nodemon": "^2.0.15"
+    "eslint-config-prettier": "^8.4.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.5.1"
   }
 }

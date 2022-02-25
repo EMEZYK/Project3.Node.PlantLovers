@@ -1,15 +1,16 @@
 import mongoose from "mongoose";
 
+const EMAIL_REGEX =
+  /[a-z0-9!#$%&'*+/=?^_{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+
 const userSchema = new mongoose.Schema({
-  _id: mongoose.Schema.Types.ObjectId,
   email: {
     type: String,
     required: true,
     min: 6,
     max: 255,
     unique: true,
-    match:
-      /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
+    match: EMAIL_REGEX,
   },
   password: {
     type: String,
@@ -31,6 +32,7 @@ const userSchema = new mongoose.Schema({
   },
   isActive: {
     type: Boolean,
+    default: false,
     required: true,
   },
   favourites: {
