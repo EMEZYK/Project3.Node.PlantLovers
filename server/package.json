@@ -10,7 +10,10 @@
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx --fix",
     "lint:eslint": "npm run prettier:write && npm run lint",
     "prettier:write": "prettier --write .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "cd .. && husky install server/.husky",
+    "pretty-quick": "pretty-quick --staged"
+
   },
   "keywords": [],
   "author": "",
@@ -25,7 +28,10 @@
     "eslint": "^8.9.0",
     "eslint-config-prettier": "^8.4.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "husky": "^7.0.4",
     "nodemon": "^2.0.15",
-    "prettier": "^2.5.1"
+    "prettier": "^2.5.1",
+    "pretty-quick": "^3.1.3"
+
   }
 }
