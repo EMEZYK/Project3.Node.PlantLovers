@@ -21,4 +21,4 @@ const validateCreateUser = (user) => {
   return schema.validate(user);
 };
 
-export default validateUser;
+export default validateCreateUser;
