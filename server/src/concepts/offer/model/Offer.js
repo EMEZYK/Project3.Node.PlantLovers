@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 
+const PHONE_REGEX = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{3})/;
+
 const offerSchema = new mongoose.Schema({
   userID: {
     type: mongoose.SchemaTypes.ObjectId,
@@ -9,15 +11,18 @@ const offerSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
+    min: 3,
+    max: 50,
   },
   description: {
     type: String,
     required: true,
+    max: 500,
   },
   city: {
     type: String,
     required: true,
-    maxLength: 58,
+    max: 58,
   },
   location: {
     lat: {
@@ -32,8 +37,16 @@ const offerSchema = new mongoose.Schema({
   phoneNumber: {
     type: Number,
     required: true,
+    min: 7,
+    max: 9,
+    match: PHONE_REGEX,
   },
   dateCreated: {
+    type: Date,
+    required: true,
+    default: Date.now,
+  },
+  dateUpdated: {
     type: Date,
     required: true,
     default: Date.now,
