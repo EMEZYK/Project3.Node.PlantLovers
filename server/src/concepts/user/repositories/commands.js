@@ -1,6 +1,6 @@
 import User from "../model/User";
 
-const createUser = (data) => {
+const createUser = async (data) => {
   const newUser = new User({
     ...data,
   });
@@ -17,15 +17,15 @@ const createUser = (data) => {
   }
 };
 
-const updateUser = () => {
-  await User.updateOne({ name: "super_name" }, { fieldToUpdate: "new_value" });
+const updateUser = async (filter, data) => {
+  await User.updateOne(filter, data);
 };
 
-const deleteUser = () => {
-  await User.deleteOne({ _id: "ObjectId" });
+const deleteUser = async (id) => {
+  await User.deleteOne({ _id: id });
 };
 
-const deleteAllUsers = () => {
+const deleteAllUsers = async () => {
   await User.deleteMany({});
 };
 
