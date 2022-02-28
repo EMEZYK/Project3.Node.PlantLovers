@@ -6,52 +6,27 @@ const createUser = (data) => {
   });
 
   try {
-    newUser.save();
+    await newUser.save();
     return newUser;
   } catch (err) {
-    console.log(err);
-    return "error";
+    if (error.name === "MongoServerError" && error.code === 11000) {
+      throw new Error("Email must be unique");
+    } else {
+      next();
+    }
   }
 };
 
 const updateUser = () => {
-  User.updateOne({}, function (err, result) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log("Updated: ", result);
-    }
-  });
-};
-
-const updateAllUsers = () => {
-  User.updateMany({}, function (err, result) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log("Updated: ", result);
-    }
-  });
+  await User.updateOne({ name: "super_name" }, { fieldToUpdate: "new_value" });
 };
 
 const deleteUser = () => {
-  User.deleteOne({})
-    .then(function () {
-      console.log("User deleted");
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+  await User.deleteOne({ _id: "ObjectId" });
 };
 
 const deleteAllUsers = () => {
-  User.deleteMany({})
-    .then(function () {
-      console.log("Users deleted");
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+  await User.deleteMany({});
 };
 
 export {
