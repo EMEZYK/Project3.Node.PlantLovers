@@ -1,7 +1,5 @@
 import mongoose from "mongoose";
 
-const PHONE_REGEX = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{3})/;
-
 const offerSchema = new mongoose.Schema({
   userID: {
     type: mongoose.SchemaTypes.ObjectId,
@@ -35,11 +33,10 @@ const offerSchema = new mongoose.Schema({
     },
   },
   phoneNumber: {
-    type: Number,
+    type: String,
     required: true,
-    min: 7,
+    min: 9,
     max: 9,
-    match: PHONE_REGEX,
   },
   dateCreated: {
     type: Date,
