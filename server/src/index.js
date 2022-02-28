@@ -3,7 +3,7 @@ import express from "express";
 import cors from "cors";
 import { config } from "dotenv";
 import mongoose from "mongoose";
-import * as students from "./concepts/student/routes/index.js";
+import students from "./concepts/student/routes/index.js";
 
 config();
 
