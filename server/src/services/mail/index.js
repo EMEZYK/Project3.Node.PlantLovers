@@ -2,24 +2,31 @@ import nodemailer from "nodemailer";
 import { config } from "dotenv";
 config();
 
-  const transporter = nodemailer.createTransport({
-      host: "smtp.mailtrap.io",
-      port: 2525,
-      auth: {
-        user: process.env.MAIL_USER,
-        pass: process.env.MAIL_USER_PASSWORD
-      }
+const sendEmail = () =>{
+
+    let transporter = nodemailer.createTransport({
+        host: "smtp.mailtrap.io",
+        port: 2525,
+        auth: {
+          user: process.env.MAIL_USER,
+          pass: process.env.MAIL_USER_PASSWORD
+        }
     });
-
-    async function run() {
-      let mailOptions = await transporter.sendMail({
-        from: 'test@example',
-        to: "foo@example.com",
-        subject: "Hello World",
-        text: "Hello world?",
-        html: "<b>Hello world?</b>",
-      });
-      console.log(mailOptions)
-    }
-
-    run().catch(err => console.log(err))
+  
+    let mailOptions = {
+      from: '"Plant Lovers" <plantlovers@plantme.com>',
+      to: "daisy@example.com",
+      text: "Can you adopt me?",
+      subject: "Hello Plant Lover 🌼",
+    };
+  
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            return console.log(error);
+        }
+        console.log('Message sent:', info.envelope);   
+  
+    });
+  }
+  
+  export default sendEmail;
