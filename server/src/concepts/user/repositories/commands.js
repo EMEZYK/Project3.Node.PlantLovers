@@ -1,6 +1,6 @@
-import User from "../model/User";
+import User from "../model/User.js";
 
-const createUser = async (data) => {
+export const createUser = async (data) => {
   const newUser = new User({
     ...data,
   });
@@ -8,31 +8,21 @@ const createUser = async (data) => {
   try {
     await newUser.save();
     return newUser;
-  } catch (err) {
+  } catch (error) {
     if (error.name === "MongoServerError" && error.code === 11000) {
       throw new Error("Email must be unique");
-    } else {
-      next();
     }
   }
 };
 
-const updateUser = async (filter, data) => {
+export const updateUser = async (filter, data) => {
   await User.updateOne(filter, data);
 };
 
-const deleteUser = async (id) => {
+export const deleteUser = async (id) => {
   await User.deleteOne({ _id: id });
 };
 
-const deleteAllUsers = async () => {
+export const deleteAllUsers = async () => {
   await User.deleteMany({});
 };
-
-export {
-  createUser,
-  updateUser,
-  updateAllUsers,
-  deleteUser,
-  deleteAllUsers,
-} from "commands";

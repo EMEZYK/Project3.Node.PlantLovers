@@ -1,5 +1,4 @@
-const Joi = require("joi-oid");
-Joi.objectId = require("joi-objectid")(Joi);
+import Joi from "joi-oid";
 
 const validateCreateUser = (user) => {
   const schema = Joi.object({
@@ -16,6 +15,8 @@ const validateCreateUser = (user) => {
     phoneNumber: Joi.number().optional(),
 
     city: Joi.string().optional(),
+
+    isAdmin: Joi.boolean(),
   });
 
   return schema.validate(user);

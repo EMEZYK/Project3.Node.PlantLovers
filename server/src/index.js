@@ -4,6 +4,7 @@ import cors from "cors";
 import { config } from "dotenv";
 import mongoose from "mongoose";
 import students from "./concepts/student/routes/index.js";
+import usersRoutes from "./concepts/user/routes/index.js";
 
 config();
 
@@ -27,3 +28,4 @@ mongoose
   .catch((err) => console.error(err));
 
 app.use("/students", students);
+app.use("/register", usersRoutes);
