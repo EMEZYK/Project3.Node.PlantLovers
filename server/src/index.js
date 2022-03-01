@@ -1,9 +1,8 @@
 /* eslint-disable no-undef */
+import { config } from "dotenv";
 import express from "express";
 import cors from "cors";
-import { config } from "dotenv";
 import mongoose from "mongoose";
-import students from "./concepts/student/routes/index.js";
 import usersRoutes from "./concepts/user/routes/index.js";
 
 config();
@@ -15,8 +14,8 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.listen(process.env.SERVER_PORT || 3000, () => {
-  console.log(`Server started at http://localhost:${process.env.SERVER_PORT}`);
+app.listen(process.env.PORT || 3000, () => {
+  console.log(`Server started`);
 });
 
 mongoose
@@ -27,5 +26,4 @@ mongoose
   .then(() => console.log("Connected into MongoDB.."))
   .catch((err) => console.error(err));
 
-app.use("/students", students);
 app.use("/register", usersRoutes);

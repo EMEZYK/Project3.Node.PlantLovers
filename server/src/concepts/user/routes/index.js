@@ -3,6 +3,6 @@ import express from "express";
 
 const router = express.Router();
 
-router.post("/register", createUser);
+router.post("/users", createUser);
 
 export default router;

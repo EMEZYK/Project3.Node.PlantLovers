@@ -15,8 +15,6 @@ const validateCreateUser = (user) => {
     phoneNumber: Joi.number().optional(),
 
     city: Joi.string().optional(),
-
-    isAdmin: Joi.boolean(),
   });
 
   return schema.validate(user);

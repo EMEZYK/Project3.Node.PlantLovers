@@ -8,9 +8,11 @@ export const createUser = async (data) => {
   try {
     await newUser.save();
     return newUser;
-  } catch (error) {
-    if (error.name === "MongoServerError" && error.code === 11000) {
+  } catch (err) {
+    if (err.name === "MongoServerError" && err.code === 11000) {
       throw new Error("Email must be unique");
+    } else {
+      console.log(err);
     }
   }
 };

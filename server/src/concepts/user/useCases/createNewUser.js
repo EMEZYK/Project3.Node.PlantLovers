@@ -1,10 +1,12 @@
-// import { createUser } from "../repositories/commands.js";
-import User from "../model/User.js";
+import { createUser } from "../repositories/commands.js";
 import bcrypt from "bcrypt";
+import { getUserWithEmail } from "../repositories/queries.js";
+import sendEmail from "../../../services/mail/index.js";
 
 const verifyIfUserExists = async (email) => {
-  const isEmailExist = await User.findOne({ email: email });
-  if (isEmailExist) {
+  const user = await getUserWithEmail(email);
+
+  if (user) {
     return true;
   }
   return false;
@@ -15,8 +17,13 @@ const createHashedPassword = async (password) => {
   return await bcrypt.hash(password, salt);
 };
 
-const sendEmail = () => {
-  //todo: replace with sending email funcionality when implemented
+const notifyUser = (userData) => {
+  const emailData = {
+    to: userData.email,
+    text: "Hey, your account was successfully created!",
+    subject: "Account created - confirmation",
+  };
+  sendEmail(emailData);
 };
 
 export const createNewUser = async (body) => {
@@ -25,8 +32,12 @@ export const createNewUser = async (body) => {
     throw new Error("User already exists in database");
   }
   const hashedPassword = await createHashedPassword(body.password);
-  body.password = hashedPassword;
-  body.confirmPassword = hashedPassword;
-  sendEmail();
-  User.create(body);
+  const verifiedUser = {
+    ...body,
+    password: hashedPassword,
+    confirmPassword: hashedPassword,
+    isAdmin: false,
+  };
+  createUser(verifiedUser);
+  notifyUser(verifiedUser);
 };
