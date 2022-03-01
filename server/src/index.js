@@ -1,11 +1,9 @@
 /* eslint-disable no-undef */
+import "dotenv/config";
 import express from "express";
 import cors from "cors";
-import { config } from "dotenv";
 import mongoose from "mongoose";
 import students from "./concepts/student/routes/index.js";
-
-config();
 
 if (!process.env.MONGO_CONNECT_URI)
   throw new Error("You must provide uri for mongo connect in env.");
