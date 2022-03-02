@@ -4,8 +4,7 @@ import { createNewUser } from "../useCases/createNewUser.js";
 export const createUser = async (req, res) => {
   const validationResult = validateCreateUser(req.body);
   if (validationResult.error) {
-    console.log(validationResult);
-    return res.status(500).send("Invalid credentials");
+    return res.status(400).send("Invalid credentials");
   }
   try {
     await createNewUser(req.body);
