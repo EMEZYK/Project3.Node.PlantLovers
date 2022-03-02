@@ -17,8 +17,8 @@ export const createUser = async (data) => {
   }
 };
 
-export const updateUser = async (filter, data) => {
-  await User.updateOne(filter, data);
+export const updateUserById = async (id, data) => {
+  await User.findByIdAndUpdate(id, data, { runValidators: true, new: true });
 };
 
 export const deleteUser = async (id) => {
