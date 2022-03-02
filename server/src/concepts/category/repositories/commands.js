@@ -10,7 +10,6 @@ const createCategory = async (data) => {
     return newCategory;
   } catch (err) {
     console.log(err);
-    return "error";
   }
 }
 
