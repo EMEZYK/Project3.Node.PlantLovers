@@ -3,6 +3,7 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import usersRoutes from "./concepts/user/routes/index.js";
 
 if (!process.env.MONGO_CONNECT_URI)
   throw new Error("You must provide uri for mongo connect in env.");
@@ -22,3 +23,5 @@ mongoose
   })
   .then(() => console.log("Connected into MongoDB.."))
   .catch((err) => console.error(err));
+
+app.use("/users", usersRoutes);

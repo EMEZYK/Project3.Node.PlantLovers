@@ -1,4 +1,4 @@
-import User from "../model/User";
+import User from "../model/User.js";
 
 export async function getUser(userId) {
   const user = await User.findById(userId);
@@ -12,4 +12,10 @@ export async function getAllUsers() {
   const users = await User.find();
 
   return users;
+}
+
+export async function getUserWithEmail(email) {
+  const foundUserByEmail = await User.findOne({ email: email });
+
+  return foundUserByEmail;
 }
