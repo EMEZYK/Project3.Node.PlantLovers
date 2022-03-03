@@ -11,6 +11,6 @@ const createCategory = async (data) => {
   } catch (err) {
     console.log(err);
   }
-}
+};
 
 export default createCategory;
