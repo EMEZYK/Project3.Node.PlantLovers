@@ -22,7 +22,7 @@ export const updateUser = async (filter, data) => {
 };
 
 export const deleteUser = async (id) => {
-  await User.deleteOne({ _id: id });
+  return await User.deleteOne({ _id: id });
 };
 
 export const deleteAllUsers = async () => {
