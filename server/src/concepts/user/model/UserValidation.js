@@ -12,7 +12,7 @@ const validateCreateUser = (user) => {
 
     confirmPassword: Joi.string().required().valid(Joi.ref("password")),
 
-    phoneNumber: Joi.number().optional(),
+    phoneNumber: Joi.string().optional(),
 
     city: Joi.string().optional(),
   });

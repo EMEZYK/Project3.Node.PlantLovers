@@ -4,6 +4,8 @@ const heightSchema = new mongoose.Schema({
   range: {
     type: String,
     required: true,
+    min: 3,
+    max: 7,
   },
 });
 
