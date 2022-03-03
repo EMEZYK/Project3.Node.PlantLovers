@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 import { getUserWithEmail } from "../repositories/queries.js";
 import sendEmail from "../../../services/mail/index.js";
 
-const createHashedPassword = async (password) => {
+export const createHashedPassword = async (password) => {
   const salt = await bcrypt.genSalt(10);
   return await bcrypt.hash(password, salt);
 };
@@ -28,6 +28,10 @@ export const createNewUser = async (body) => {
     password: hashedPassword,
     isAdmin: false,
   };
-  createUser(verifiedUser);
+
+  const createdUser = await createUser(verifiedUser);
+
   notifyUser(verifiedUser);
+
+  return createdUser;
 };

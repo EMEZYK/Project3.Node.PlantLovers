@@ -1,7 +1,7 @@
 import User from "../model/User.js";
 
 export async function getUser(userId) {
-  const user = await User.findById(userId);
+  const user = await User.findById(userId).select("-password");
   if (!user) {
     throw "There is no user with id = " + userId;
   }

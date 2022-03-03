@@ -6,6 +6,6 @@ import express from "express";
 const router = express.Router();
 
 router.post("/register", createUser);
-router.put("/updateUser/:id", updateUser);
+router.put("/:id", updateUser);
 
 export default router;

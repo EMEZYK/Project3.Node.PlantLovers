@@ -6,8 +6,8 @@ export const createUser = async (data) => {
   });
 
   try {
-    await newUser.save();
-    return newUser;
+    const saveUser = await newUser.save();
+    return saveUser;
   } catch (err) {
     if (err.name === "MongoServerError" && err.code === 11000) {
       throw new Error("Email must be unique");
@@ -18,7 +18,10 @@ export const createUser = async (data) => {
 };
 
 export const updateUserById = async (id, data) => {
-  await User.findByIdAndUpdate(id, data, { runValidators: true, new: true });
+  return await User.findByIdAndUpdate(id, data, {
+    runValidators: true,
+    new: true,
+  });
 };
 
 export const deleteUser = async (id) => {
