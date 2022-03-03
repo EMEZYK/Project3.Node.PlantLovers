@@ -10,9 +10,13 @@ const validateCreateOffer = (offer) => {
 
     phoneNumber: Joi.number().min(9).max(9).required(),
 
-    url: Joi.string().required(),
+    photos: [
+      {
+        url: Joi.string().required(),
 
-    isMainPhoto: Joi.boolean().required(),
+        isMainPhoto: Joi.boolean().required(),
+      },
+    ],
 
     category: Joi.objectId().required(),
 
