@@ -8,15 +8,14 @@ const validateCreateOffer = (offer) => {
 
     city: Joi.string().max(58).required(),
 
-    phoneNumber: Joi.number().min(9).max(9).required(),
+    phoneNumber: Joi.string().min(9).max(9).required(),
 
-    photos: [
-      {
+    photos: Joi.array().items(
+      Joi.object({
         url: Joi.string().required(),
-
         isMainPhoto: Joi.boolean().required(),
-      },
-    ],
+      })
+    ),
 
     category: Joi.objectId().required(),
 
