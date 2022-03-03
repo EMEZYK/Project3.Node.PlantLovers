@@ -5,6 +5,6 @@ import express from "express";
 const router = express.Router();
 
 router.post("/register", createUser);
-router.delete("/deleteUser/:id", deleteUser);
+router.delete("/:id", deleteUser);
 
 export default router;
