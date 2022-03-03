@@ -11,6 +11,6 @@ const createHeight = async (data) => {
   } catch (err) {
     console.log(err);
   }
-}
+};
 
 export default createHeight;
