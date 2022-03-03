@@ -7,19 +7,19 @@ const createOffer = async (data) => {
   });
 
   try {
-    await newOffer.save();
-    return newOffer;
+    return await newOffer.save();
   } catch (err) {
     console.log(err);
+    return new Error("Offer wasn't created");
   }
 };
 
 const deleteOffer = async (offerId) => {
-  await Offer.deleteOne({ _id: offerId });
+  return await Offer.deleteOne({ _id: offerId });
 };
 
 const updateOffer = async (filter, data) => {
-  await Offer.updateOne(filter, data);
+  return await Offer.updateOne(filter, data);
 };
 
 export { createOffer, deleteOffer, updateOffer } from "commands";
