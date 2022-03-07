@@ -1,5 +1,5 @@
-import addNewCategory from "../useCases/addNewCategory";
-import validateCreateCategory from "../model/CategoryValidation";
+import addNewCategory from "../useCases/addNewCategory.js";
+import validateCreateCategory from "../model/CategoryValidation.js";
 
 export const createCategory = async (req, res) => {
   const validationCategory = validateCreateCategory();
