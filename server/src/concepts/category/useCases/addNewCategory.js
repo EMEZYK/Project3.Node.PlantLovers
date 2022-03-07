@@ -1,12 +1,12 @@
 import createCategory from "../repositories/commands.js";
-import { findCategories } from "../repositories/queries.js";
+import { findCategoryByName } from "../repositories/queries.js";
 
 const addNewCategory = async (data) => {
-  const existingCategory = await findCategories();
+  const existingCategory = await findCategoryByName(data.name);
   if (existingCategory) {
     throw new Error("Category already exist");
   }
-  const addCategory = new createCategory({
+  const addCategory = await createCategory({
     ...data,
   });
 

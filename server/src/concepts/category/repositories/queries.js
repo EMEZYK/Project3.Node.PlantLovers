@@ -11,8 +11,7 @@ export async function getAllCategories() {
 
   return categories;
 }
-
-export async function findCategories(newCategoryName) {
-  const findCategory = await Category.find({ name: newCategoryName});
+export async function findCategoryByName(newCategoryName) {
+  const findCategory = await Category.findOne({ name: newCategoryName });
   return findCategory;
 }
