@@ -11,10 +11,10 @@ const addNewCategory = async (data) => {
   });
 
   try {
-    await addCategory.save();
-    return addCategory;
+    return await addCategory.save();
   } catch (err) {
     console.log(err);
+    return new Error("Category wasn't added");
   }
 };
 
