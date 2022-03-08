@@ -6,16 +6,7 @@ const addNewCategory = async (data) => {
   if (existingCategory) {
     throw new Error("Category already exist");
   }
-  const addCategory = await createCategory({
-    ...data,
-  });
-
-  try {
-    return await addCategory.save();
-  } catch (err) {
-    console.log(err);
-    return new Error("Category wasn't added");
-  }
+  return await createCategory(data);
 };
 
 export default addNewCategory;
