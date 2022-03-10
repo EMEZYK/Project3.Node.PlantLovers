@@ -1,5 +1,6 @@
 import "dotenv/config";
 import jwt from "jsonwebtoken";
+import sendEmail from "../../../services/mail/index.js";
 
 export const generateToken = (req, res, user) => {
   const accessToken = jwt.sign(
@@ -57,4 +58,23 @@ export const isThatUser = (req, res, next) => {
     return res.status(401).send("Wrong authorisation data!");
 
   next();
+};
+
+export const activateAccount = (req, user) => {
+  const activateToken = jwt.sign(
+    { email: user.email },
+    process.env.TOKEN_SECRET,
+    { expiresIn: 3600000 }
+  );
+
+  jwt.verify(activateToken, process.env.TOKEN_SECRET, (err) => {
+    if (err) return res.status(401).send("Email verification failed, possibly the link is invalid or expired");
+  });
+
+  const emailData = {
+    to: user.email,
+    text: "Your account was successfully activated!",
+    subject: "Account activate - confirmation",
+  };
+  sendEmail(emailData);
 };
