@@ -18,10 +18,9 @@ export const createCategory = async (req, res) => {
 export const getCategories = async (req, res) => {
   try {
     const allCategories = await getAllCategories();
-    if (!allCategories) return res.status(404).send("No category found!")
+    if (!allCategories) return res.status(404).send("No category found!");
+    return res.status(200).send(allCategories);
   } catch (error) {
     return res.status.send(500).send(error.message);
   }
-
-  return res.status(200).send("Category found");
 };
