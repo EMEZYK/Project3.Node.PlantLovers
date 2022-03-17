@@ -1,6 +1,5 @@
 import nodemailer from "nodemailer";
-import { config } from "dotenv";
-config();
+import "dotenv/config";
 
 const transporter = nodemailer.createTransport({
   host: "smtp.mailtrap.io",

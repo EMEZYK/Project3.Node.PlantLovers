@@ -4,7 +4,10 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import usersRoutes from "./concepts/user/routes/index.js";
+import heightRoutes from "./concepts/height/routes/index.js";
+
 import authRoute from "./concepts/authorization/routes/index.js";
+
 
 if (!process.env.MONGO_CONNECT_URI)
   throw new Error("You must provide uri for mongo connect in env.");
@@ -26,4 +29,7 @@ mongoose
   .catch((err) => console.error(err));
 
 app.use("/users", usersRoutes);
+app.use("/heights", heightRoutes);
+
 app.use("/auth", authRoute);
+

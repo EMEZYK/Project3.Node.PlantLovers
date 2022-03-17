@@ -10,6 +10,7 @@ const createHeight = async (data) => {
     return newHeight;
   } catch (err) {
     console.log(err);
+    return new Error("Height wasn't created");
   }
 };
 
