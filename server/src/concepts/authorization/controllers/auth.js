@@ -1,42 +1,46 @@
 import "dotenv/config";
 import jwt from "jsonwebtoken";
 
-const checkToken = (req, res) => {
-  let token = req.headers.token;
-  if (!token) {
-    token = req.body.token;
-  }
-  if (!token) return res.status(401).send("Access token is missing");
+export const isTokenValid = async (req, res) => {
+  const token = req.headers.token;
+  if(!token) {
+    await res.status(401).send("Access denied");
+    console.log("odmowa dostępu");
+  } 
 
-  return checkToken;
+  try {
+    // const verify = Boolean(jwt.verify(token, process.env.TOKEN_SECRET));
+    const verify = jwt.verify(token, process.env.TOKEN_SECRET);
+    res.status(200).send("Authorization correct");
+    console.log(verify);
+  } catch (err) {
+    res.status(400).send("Wrong authorization!")
+    console.log("NOOO");
+  }
+
 }
 
-export const generateToken = (req, user) => {
+export const generateToken = (req, res, user) => {
   const accessToken = jwt.sign(
     { sub: user._id, rol: user.isAdmin },
     process.env.TOKEN_SECRET,
     { expiresIn: 864000000 }
   );
-
-  return accessToken;
+  res.send(accessToken);
+  // return accessToken;
 };
 
 
 export const isAuthenticated = (req, res, next) => {
-  checkToken(req, res);
+  const token = req.headers.token;
+  if (!isTokenValid(token)) return res.status(401).send("You have no access to this resource!");
 
-  jwt.verify(token, process.env.TOKEN_SECRET, (err) => {
-    if (err) return res.status(401).send("Invalid token");
-  });
   next();
 };
 
 export const isAdmin = (req, res, next) => {
-  checkToken(req, res);
-
-  jwt.verify(token, process.env.TOKEN_SECRET, (err) => {
-    if (err) return res.status(401).send("Wrong authorization!");
-  });
+  const token = req.headers.token;
+  if (!isTokenValid(token)) return res.status(401).send("You have no access to this resource!");
 
   const decoded = jwt.decode(token);
   if (!decoded.rol) return res.status(401).send("You have no authorisation!");
@@ -45,11 +49,8 @@ export const isAdmin = (req, res, next) => {
 };
 
 export const isThatUser = (req, res, next) => {
-  checkToken(req, res);
-
-  jwt.verify(token, process.env.TOKEN_SECRET, (err) => {
-    if (err) return res.status(401).send("Wrong authorization!");
-  });
+  const token = req.headers.token;
+  if (!isTokenValid(token)) return res.status(401).send("You have no access to this resource!");
 
   const decoded = jwt.decode(token);
   if (!decoded || decoded.sub !== req.params.id)
@@ -58,17 +59,26 @@ export const isThatUser = (req, res, next) => {
   next();
 };
 
-export const activateAccount = (req, user) => {
+
+
+
+
+
+
+
+
+
+
+
+export const activateAccount = (req, res, user) => {
   const activateToken = jwt.sign(
     { email: user.email },
     process.env.TOKEN_SECRET,
     { expiresIn: 600000 }
   );
-
   jwt.verify(activateToken, process.env.TOKEN_SECRET, (err) => {
     if (err)
       return res.status(401).send("Email verification failed, possibly the link is invalid or expired");
   });
-
-  return activateAccount;
+  return activateToken;
 };
