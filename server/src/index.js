@@ -4,6 +4,7 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import usersRoutes from "./concepts/user/routes/index.js";
+import categoryRoutes from "./concepts/category/routes/index.js";
 import heightRoutes from "./concepts/height/routes/index.js";
 
 
@@ -27,4 +28,5 @@ mongoose
   .catch((err) => console.error(err));
 
 app.use("/users", usersRoutes);
+app.use("/categories", categoryRoutes);
 app.use("/heights", heightRoutes);
