@@ -2,6 +2,7 @@ import validateCreateUser from "../model/UserValidation.js";
 import { createNewUser } from "../useCases/createNewUser.js";
 import { updateUserFunc } from "../useCases/updateUser.js";
 import { deleteUserWithId } from "../useCases/deleteUser.js";
+import { signInUserFunc } from "../useCases/signInUser.js";
 
 export const createUser = async (req, res) => {
   const validationResult = validateCreateUser(req.body);
@@ -32,12 +33,6 @@ export const updateUser = async (req, res) => {
   } catch (error) {
     return res.status(500).send(error.message);
   }
-  // const updatedUserData = await getUser(req.params.id);
-
-  // return res.status(200).send({
-  //   message: "User was updated",
-  //   data: updatedUser,
-  // });
 };
 
 export const deleteUser = async (req, res) => {
@@ -48,4 +43,19 @@ export const deleteUser = async (req, res) => {
     return res.status(500).send(error.message);
   }
   return res.status(200).send(`User with ${req.params.id} was deleted`);
+};
+
+export const loginUser = async (req, res) => {
+  try {
+    const token = await signInUserFunc(req.body.email, req.body.password);
+    if (!token) {
+      return res.status(400).send("Unsuccessful login attempt");
+    }
+    res.setHeader("authorisation", token);
+    return res.status(200).send({
+      message: "Successfully logged in",
+    });
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
 };
