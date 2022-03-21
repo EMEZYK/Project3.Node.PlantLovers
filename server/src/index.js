@@ -7,7 +7,6 @@ import usersRoutes from "./concepts/user/routes/index.js";
 import categoryRoutes from "./concepts/category/routes/index.js";
 import heightRoutes from "./concepts/height/routes/index.js";
 
-
 if (!process.env.MONGO_CONNECT_URI)
   throw new Error("You must provide uri for mongo connect in env.");
 
