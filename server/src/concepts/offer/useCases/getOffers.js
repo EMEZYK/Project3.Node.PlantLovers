@@ -1,3 +1,5 @@
 import { getAllOffers } from "../repositories/queries.js";
 
-getAllOffers({}, 10, 10);
+export const getOffers = async () => {
+    return getAllOffers({}, 10, 10);
+};
