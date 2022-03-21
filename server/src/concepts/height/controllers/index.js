@@ -1,5 +1,5 @@
-import addNewHeight from "../useCases/addNewHeight";
-import validateCreateHeight from "../model/HeightValidation";
+import addNewHeight from "../useCases/addNewHeight.js";
+import validateCreateHeight from "../model/HeightValidation.js";
 import { getAllHeights } from "../repositories/queries.js";
 
 export const createHeight = async (req, res) => {
