@@ -52,7 +52,7 @@ export const isAdmin = (req, res, next) => {
 export const isThatUser = (req, res, next) => {
   const token = req.headers.token;
   const isCorrect = isTokenValid(token);
-  
+
   if (!isCorrect) {
     return res.status(401).send("Access denied!");
   }
