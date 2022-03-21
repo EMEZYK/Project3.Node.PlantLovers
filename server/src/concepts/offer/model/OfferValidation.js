@@ -8,6 +8,13 @@ const validateCreateOffer = (offer) => {
 
     city: Joi.string().max(58).required(),
 
+    location: Joi.array().items(
+      Joi.object({
+        lat: Joi.number().optional(),
+        lon: Joi.number().optional(),
+      })
+    ),
+
     phoneNumber: Joi.string().min(9).max(9).required(),
 
     photos: Joi.array().items(

@@ -22,16 +22,18 @@ const offerSchema = new mongoose.Schema({
     required: true,
     max: 58,
   },
-  location: {
-    lat: {
-      type: Number,
-      required: false,
+  location: [
+    {
+      lat: {
+        type: Number,
+        required: false,
+      },
+      lon: {
+        type: Number,
+        required: false,
+      },
     },
-    lon: {
-      type: Number,
-      required: false,
-    },
-  },
+  ],
   phoneNumber: {
     type: String,
     required: true,
