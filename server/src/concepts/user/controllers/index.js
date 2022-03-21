@@ -47,11 +47,14 @@ export const deleteUser = async (req, res) => {
 
 export const loginUser = async (req, res) => {
   try {
+    if (!req.body.email || !req.body.password) {
+      return res.status(400).send("Need email and password");
+    }
     const token = await signInUserFunc(req.body.email, req.body.password);
     if (!token) {
       return res.status(400).send("Unsuccessful login attempt");
     }
-    res.setHeader("authorisation", token);
+    res.setHeader("token", token);
     return res.status(200).send({
       message: "Successfully logged in",
     });
