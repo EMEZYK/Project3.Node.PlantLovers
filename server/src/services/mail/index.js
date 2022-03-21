@@ -14,7 +14,7 @@ const sendEmail = (data) => {
   const mailOptions = {
     from: '"Plant Lovers" <plantlovers@plantme.com>',
     to: data.to,
-    text: data.text,
+    html: data.html,
     subject: `${data.subject} 🌼`,
   };
 
