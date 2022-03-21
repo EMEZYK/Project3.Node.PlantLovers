@@ -6,6 +6,7 @@ export async function createNewOffer(body) {
       title: body.title,
       description: body.description,
       city: body.city,
+      location: body.location || {},
       phoneNumber: body.phoneNumber,
       photos: body.photos,
       category: body.category,
