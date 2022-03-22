@@ -32,6 +32,7 @@ const offerSchema = new mongoose.Schema({
       required: false,
     },
   },
+
   phoneNumber: {
     type: String,
     required: true,
