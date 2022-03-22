@@ -64,3 +64,21 @@ export const isThatUser = (req, res, next) => {
 
   next();
 };
+
+export const isThatUserOrAdmin = (req, res, next) => {
+  const token = req.headers.token;
+  const isCorrect = isTokenValid(token);
+
+  if (!isCorrect) {
+    return res.status(401).send("Access denied!");
+  }
+
+  const decoded = jwt.decode(token);
+  if (!decoded || (!decoded.rol && decoded.sub !== req.params.id)) {
+    return res
+      .status(401)
+      .send("You are not authorized to perform this action!");
+  }
+
+  next();
+};

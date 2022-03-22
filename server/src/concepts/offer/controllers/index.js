@@ -1,4 +1,3 @@
-
 import { getOffers } from "../useCases/getOffers.js";
 import createNewOffer from "../useCases/createNewOffer";
 import validateCreateOffer from "../model/OfferValidation";
