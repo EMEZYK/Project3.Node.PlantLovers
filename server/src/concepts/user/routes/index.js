@@ -1,13 +1,20 @@
-import { createUser } from "../controllers/index.js";
-import { updateUser } from "../controllers/index.js";
-import { deleteUser } from "../controllers/index.js";
-import { loginUser } from "../controllers/index.js";
+import {
+  createUser,
+  updateUser,
+  deleteUser,
+  loginUser,
+} from "../controllers/index.js";
+import {
+  isAuthenticated,
+  isAdmin,
+} from "../../authorization/controllers/auth.js";
 import express from "express";
 
 const router = express.Router();
 
 router.post("/register", createUser);
-router.put("/:id", updateUser);
-router.delete("/:id", deleteUser);
+router.put("/:id", isAuthenticated, isAdmin, updateUser);
+router.delete("/:id", isAdmin, deleteUser);
 router.post("/login", loginUser);
+
 export default router;
