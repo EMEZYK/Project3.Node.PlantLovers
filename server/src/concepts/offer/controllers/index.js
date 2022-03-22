@@ -1,5 +1,6 @@
 import { updateOfferFunc } from "../useCases/updateOffer";
 import { validateCreateOffer } from "../model/OfferValidation";
+import jwt from "jsonwebtoken";
 
 export const updateOffer = async (req, res) => {
   const validationCheck = validateCreateOffer(req.body);
@@ -7,7 +8,9 @@ export const updateOffer = async (req, res) => {
     return res.status(400).send("Invalid data");
   }
   try {
-    const updatedOffer = await updateOfferFunc(req.params.id, req.body);
+    const updatedOffer = await updateOfferFunc(req.params.id, userId, req.body);
+    const decoded = jwt.decode(req.headers.token);
+    const userId = decoded.sub;
     return res.status(200).send({
       message: "Offer was updated",
       data: updatedOffer,
