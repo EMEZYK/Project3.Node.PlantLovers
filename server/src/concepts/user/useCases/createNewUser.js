@@ -5,6 +5,7 @@ import sendEmail from "../../../services/mail/index.js";
 import pug from "pug";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
+import { generateToken } from "../../authorization/controllers/auth.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -14,17 +15,19 @@ export const createHashedPassword = async (password) => {
   return await bcrypt.hash(password, salt);
 };
 
-const notifyUser = (userData) => {
+const notifyUser = (user) => {
   const emailData = {
-    to: userData.email,
+    to: user.email,
     html: pug.renderFile(
       path.resolve(__dirname, "../../../../views/user.pug"),
       {
-        email: userData.email,
+        email: user.email,
+        token: generateToken(user, 3600000),
       }
     ),
     subject: "Account created - confirmation",
   };
+
   sendEmail(emailData);
 };
 
@@ -42,7 +45,7 @@ export const createNewUser = async (body) => {
 
   const createdUser = await createUser(verifiedUser);
 
-  notifyUser(verifiedUser);
+  notifyUser(createdUser);
 
   return createdUser;
 };
