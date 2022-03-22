@@ -2,6 +2,12 @@ import { createUser } from "../repositories/commands.js";
 import bcrypt from "bcrypt";
 import { getUserWithEmail } from "../repositories/queries.js";
 import sendEmail from "../../../services/mail/index.js";
+import pug from "pug";
+import path, { dirname } from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 export const createHashedPassword = async (password) => {
   const salt = await bcrypt.genSalt(10);
@@ -11,7 +17,12 @@ export const createHashedPassword = async (password) => {
 const notifyUser = (userData) => {
   const emailData = {
     to: userData.email,
-    text: "Hey, your account was successfully created!",
+    html: pug.renderFile(
+      path.resolve(__dirname, "../../../../views/user.pug"),
+      {
+        email: userData.email,
+      }
+    ),
     subject: "Account created - confirmation",
   };
   sendEmail(emailData);
