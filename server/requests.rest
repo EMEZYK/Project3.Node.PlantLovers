@@ -1,0 +1,87 @@
+# ____________________________ USERS ____________________________
+
+###
+# login
+POST http://localhost:3000/users/login
+Content-Type: application/json
+
+{
+    "email": "testmail@mail.com",
+    "password": "1234567"
+}
+
+###
+# create users
+POST http://localhost:3000/users/register 
+Content-Type: application/json
+
+{
+    "email": "testmail@mail.com",
+    "password": "12345678",
+    "confirmPassword": "12345678"
+}
+
+###
+# update user
+PUT http://localhost:3000/users/621f32d82312944d93f5ff81
+token:
+Content-Type: application/json
+
+{
+    "password": "123458ujj8",
+    "confirmPassword": "123458ujj8"
+}
+
+###
+# delete user
+DELETE http://localhost:3000/users/621f3780906c210f8af8ce83
+Content-Type: application/json
+
+
+
+###
+# ____________________________ CATEGORIES____________________________
+# create category
+POST http://localhost:3000/categories
+Content-Type: application/json
+
+{
+	"name": "shrubs"
+}
+
+###
+# get all categories
+GET http://localhost:3000/categories
+
+###
+# ____________________________ HEIGHTS____________________________
+# create height
+POST http://localhost:3000/heights
+Content-Type: application/json
+
+{
+	"range": "9008"
+}
+
+###
+# get all heights
+GET http://localhost:3000/heights
+
+###
+# ____________________________ OFFERS____________________________
+# create offer
+POST http://localhost:3000/
+Content-Type: application/json
+
+{
+	"title": "Plantssss",
+    "description": "Lorem ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    "city": "Sanok",
+    "phoneNumber": "983743783"
+}
+
+###
+# get all offers
+GET http://localhost:3000/
+
+
