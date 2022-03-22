@@ -6,7 +6,7 @@ import { isAuthenticated } from "../../authorization/controllers/auth.js";
 
 const router = express.Router();
 
-router.post("/", createOffer);
+router.post("/", isAuthenticated, createOffer);
 router.get("/offers", getOffers);
 router.put("/:id", isAuthenticated, updateOffer);
 
