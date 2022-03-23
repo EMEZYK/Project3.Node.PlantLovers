@@ -6,7 +6,9 @@ import {
 } from "../repositories/commands.js";
 import createNewOffer from "../useCases/createNewOffer";
 import deleteOfferWithId from "../useCases/deleteOfferWithId";
-import validateCreateOffer from "../model/OfferValidation";
+import validateCreateOffer from "../model/OfferValidation.js";
+import { updateOfferFunc } from "../useCases/updateOffer.js";
+import jwt from "jsonwebtoken";
 
 export const getAllOffers = async (req, res) => {
   try {
@@ -18,9 +20,9 @@ export const getAllOffers = async (req, res) => {
 };
 
 export const createOffer = async (req, res) => {
-  const validationOffer = validateCreateOffer(req.body);
-  if (validationOffer.error) {
-    return res.status(400).send("Invalid data");
+  const { error } = validateCreateOffer(req.body);
+  if (error) {
+    return res.status(400).send(error.details[0].message);
   }
   try {
     await createNewOffer(req.body);
@@ -76,6 +78,24 @@ export const addView = async (req, res) => {
     return res.status(200).send({
       message: "View was added",
       data: viewAdded.views,
+    });
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
+};
+
+export const updateOffer = async (req, res) => {
+  const validationCheck = validateCreateOffer(req.body);
+  if (validationCheck.error) {
+    return res.status(400).send("Invalid data");
+  }
+  try {
+    const decoded = jwt.decode(req.headers.token);
+    const userId = decoded.sub;
+    const updatedOffer = await updateOfferFunc(req.params.id, userId, req.body);
+    return res.status(200).send({
+      message: "Offer was updated",
+      data: updatedOffer,
     });
   } catch (error) {
     return res.status(500).send(error.message);

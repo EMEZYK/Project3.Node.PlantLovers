@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
-import Offer from "../model/Offer";
+import Offer from "../model/Offer.js";
 
-const createOffer = async (data) => {
+export const createOffer = async (data) => {
   const newOffer = new Offer({
     ...data,
   });
@@ -14,15 +14,15 @@ const createOffer = async (data) => {
   }
 };
 
-const deleteOffer = async (offerId) => {
+export const deleteOffer = async (offerId) => {
   return await Offer.deleteOne({ _id: offerId });
 };
 
-const updateOffer = async (filter, data) => {
+export const updateOffer = async (filter, data) => {
   return await Offer.updateOne(filter, data);
 };
 
-const activateOfferWithId = async (id, data) => {
+export const activateOfferWithId = async (id, data) => {
   const activatedOffer = {
     ...data,
     isActive: true,
@@ -30,7 +30,7 @@ const activateOfferWithId = async (id, data) => {
   return await Offer.updateOne(id, activatedOffer);
 };
 
-const archiveOfferWithId = async (id, data) => {
+export const archiveOfferWithId = async (id, data) => {
   const archivedOffer = {
     ...data,
     isArchived: true,
@@ -38,19 +38,10 @@ const archiveOfferWithId = async (id, data) => {
   return await Offer.updateOne(id, archivedOffer);
 };
 
-const addOneView = async (id, data) => {
+export const addOneView = async (id, data) => {
   const addedView = {
     ...data,
     views: data.views + 1,
   };
   return await Offer.updateOne(id, addedView);
 };
-
-export {
-  createOffer,
-  deleteOffer,
-  updateOffer,
-  activateOfferWithId,
-  archiveOfferWithId,
-  addOneView,
-} from "commands";
