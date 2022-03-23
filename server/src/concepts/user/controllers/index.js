@@ -1,4 +1,5 @@
 import validateCreateUser from "../model/UserValidation.js";
+import User from "../model/User.js";
 import { createNewUser } from "../useCases/createNewUser.js";
 import { updateUserFunc } from "../useCases/updateUser.js";
 import { deleteUserWithId } from "../useCases/deleteUser.js";
@@ -60,5 +61,22 @@ export const loginUser = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).send(error.message);
+  }
+};
+
+export const activateAccount = async (req, res) => {
+  const user = await User.findById(req.params.id);
+  if (!user) {
+    return res.status(404).send("There is no user");
+  }
+  user.set({
+    isActive: true,
+  });
+
+  try {
+    await user.save();
+    res.send("Your account has been activated");
+  } catch (err) {
+    return res.status(500).send("Account couldn't be activated");
   }
 };
