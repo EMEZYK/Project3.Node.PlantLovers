@@ -11,7 +11,7 @@ import {
 import { getOffers } from "../useCases/getOffers.js";
 import { isAuthenticated } from "../../authorization/controllers/auth.js";
 import {
-  isThatUser,
+  isAdmin,
   isThatUserOrAdmin,
 } from "../../authorization/controllers/auth.js";
 
@@ -22,8 +22,8 @@ router.delete("/:id", isThatUserOrAdmin, deleteOffer);
 router.get("/offers", getOffers);
 router.get("/", getAllOffers);
 router.put("/:id", isAuthenticated, updateOffer);
-router.put("/:id", isThatUser, activateOffer);
-router.put("/:id", isThatUserOrAdmin, archiveOffer);
-router.put("/:id", addView);
+router.put("/activate/:id", isAdmin, activateOffer);
+router.put("/archive/:id", isAuthenticated, archiveOffer);
+router.put("/view/:id", addView);
 
 export default router;
