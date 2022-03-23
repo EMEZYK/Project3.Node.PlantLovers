@@ -13,6 +13,6 @@ export async function getAllHeights() {
 }
 
 export async function findHeightByValue(newHeightValue) {
-  const findHeight = await Height.findOne({ value: newHeightValue });
+  const findHeight = await Height.findOne({ range: newHeightValue });
   return findHeight;
 }

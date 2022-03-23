@@ -24,15 +24,16 @@ Members:
 - [Technologies](#technologies)
 - [Requirements](#requirements)
 - [Setup](#setup)
-<br></br>
+<br>
 ### General Information
 ---
 The team worked as part of the CodersCamp course. The application was made by the course participants.
 
-The aim of the project was to create our own API, which we will use in the next modules of the course. Using the database, we can create a user, log in, edit password, create, edit and delete offers, as well as add a category and height of plants. 
+The aim of the project was to create our own API, which we will use in the next modules of the course. Using the database, we can create, log in, and edit a user, create, edit and delete offers, as well as add a category and height of plants. 
 
 Since our application is implemented by several developers, we decided to use the Prettier library to format the code.
-<br></br>
+<br>
+
 ### Technologies
 ---
 This project was executed using the following technologies:
@@ -84,8 +85,6 @@ git clone https://github.com/Coderscamp-2021-2022-Lukasz-Kamil/Project3.Node.Pla
 
 ## Method: POST
 ---
-
-<br>
 
 ### **/users/register**
 <br>
@@ -172,7 +171,7 @@ Create Height. Example body in that request:
 }
 ```
 
-If the provided data are invalid, the following message will be displayed: `Invalid data`. If height was created successfully: `Height created` and `Height already exist` if height exist.
+If the provided data are invalid, the following message will be displayed: `Invalid data`. If height was created successfully: `Height added!` and `Height already exist` if height exist.
 
 ## Method: POST
 ---
