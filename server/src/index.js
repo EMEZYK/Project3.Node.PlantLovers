@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 import usersRoutes from "./concepts/user/routes/index.js";
 import categoryRoutes from "./concepts/category/routes/index.js";
 import heightRoutes from "./concepts/height/routes/index.js";
+import offerRoutes from "./concepts/offer/routes/index";
 
 if (!process.env.MONGO_CONNECT_URI)
   throw new Error("You must provide uri for mongo connect in env.");
@@ -29,3 +30,4 @@ mongoose
 app.use("/users", usersRoutes);
 app.use("/categories", categoryRoutes);
 app.use("/heights", heightRoutes);
+app.use("/offers", offerRoutes);
