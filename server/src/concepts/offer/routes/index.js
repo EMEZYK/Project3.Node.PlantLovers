@@ -7,7 +7,7 @@ import { isAuthenticated } from "../../authorization/controllers/auth.js";
 const router = express.Router();
 
 router.post("/", createOffer);
-router.get("/offers", getOffers);
+router.get("/", getOffers);
 router.put("/:id", isAuthenticated, updateOffer);
 
 export default router;
