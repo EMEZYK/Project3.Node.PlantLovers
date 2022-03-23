@@ -22,4 +22,35 @@ const updateOffer = async (filter, data) => {
   return await Offer.updateOne(filter, data);
 };
 
-export { createOffer, deleteOffer, updateOffer } from "commands";
+const activateOfferWithId = async (id, data) => {
+  const activatedOffer = {
+    ...data,
+    isActive: true,
+  };
+  return await Offer.updateOne(id, activatedOffer);
+};
+
+const archiveOfferWithId = async (id, data) => {
+  const archivedOffer = {
+    ...data,
+    isArchived: true,
+  };
+  return await Offer.updateOne(id, archivedOffer);
+};
+
+const addOneView = async (id, data) => {
+  const addedView = {
+    ...data,
+    views: data.views + 1,
+  };
+  return await Offer.updateOne(id, addedView);
+};
+
+export {
+  createOffer,
+  deleteOffer,
+  updateOffer,
+  activateOfferWithId,
+  archiveOfferWithId,
+  addOneView,
+} from "commands";
