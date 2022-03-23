@@ -3,6 +3,7 @@ import {
   updateUser,
   deleteUser,
   loginUser,
+  activateAccount,
 } from "../controllers/index.js";
 import {
   isThatUser,
@@ -14,6 +15,7 @@ const router = express.Router();
 
 router.post("/register", createUser);
 router.put("/:id", isThatUser, updateUser);
+router.put("/activate/:id", isThatUser, activateAccount);
 router.delete("/:id", isThatUserOrAdmin, deleteUser);
 router.post("/login", loginUser);
 
