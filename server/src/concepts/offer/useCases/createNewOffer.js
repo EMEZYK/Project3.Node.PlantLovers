@@ -27,10 +27,10 @@ const notifyUserAboutOffer = (user, offer) => {
 };
 
 export async function createNewOffer(body) {
-  const user = await User.findById(body.userID);
+  const user = await User.findById(body.userId);
   try {
     const offer = await createOffer({
-      userID: user._id,
+      userId: user._id,
       title: body.title,
       description: body.description,
       city: body.city,

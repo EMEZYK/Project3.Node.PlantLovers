@@ -3,9 +3,9 @@ import validateCreateCategory from "../model/CategoryValidation.js";
 import { getAllCategories } from "../repositories/queries.js";
 
 export const createCategory = async (req, res) => {
-  const validationCategory = validateCreateCategory(req.body);
-  if (validationCategory.error) {
-    return res.status(400).send("Invalid data");
+  const { error } = validateCreateCategory(req.body);
+  if (error) {
+    return res.status(400).send(error.details[0].message);
   }
   try {
     await addNewCategory(req.body);
