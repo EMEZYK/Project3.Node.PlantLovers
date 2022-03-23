@@ -1,0 +1,103 @@
+# ____________________________ USERS ____________________________
+###
+# create users
+POST http://localhost:3000/users/register 
+Content-Type: application/json
+
+{
+    "email": "testmailtwo@mail.com",
+    "password": "12345678",
+    "confirmPassword": "12345678"
+}
+
+###
+# login
+POST http://localhost:3000/users/login
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MjNiMzU4YTcxMjU5Nzg4NDU4MGM5YWYiLCJyb2wiOmZhbHNlLCJpYXQiOjE2NDgwNDc0OTgsImV4cCI6MTY1MTY0NzQ5OH0.F7Ezo1yDDqRAfG_seir9zEmu6xtTDWtXSy9c0qtYybI
+Content-Type: application/json
+
+{
+    "email": "testmailtwo@mail.com",
+    "password": "12345678"
+}
+
+###
+# update user
+PUT http://localhost:3000/users/62383c52f98524f57ba08a4b
+//POTRZEBNY TOKEN token
+Content-Type: application/json
+
+{
+    "city": "Kołobrzeg"
+}
+
+###
+# delete user
+DELETE http://localhost:3000/users/621f3780906c210f8af8ce83
+Content-Type: application/json
+
+
+
+###
+# ____________________________ CATEGORIES____________________________
+# create category
+POST http://localhost:3000/categories
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDczODY0NDcsImV4cCI6MjUxMTM4NjQ0N30.PmiBkkD6iFzT6Fw0PJkpggiQ05ttDJZw9L4LgiuP0q0
+Content-Type: application/json
+
+{
+	"name": "trees"
+}
+
+###
+# get all categories
+GET http://localhost:3000/categories
+
+###
+# ____________________________ HEIGHTS____________________________
+# create height
+POST http://localhost:3000/heights
+Content-Type: application/json
+
+{
+	"range": "9008"
+}
+
+###
+# get all heights
+GET http://localhost:3000/heights
+
+###
+# ____________________________ OFFERS____________________________
+# create offer
+POST http://localhost:3000/offers
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDczODY0NDcsImV4cCI6MjUxMTM4NjQ0N30.PmiBkkD6iFzT6Fw0PJkpggiQ05ttDJZw9L4LgiuP0q0
+Content-Type: application/json
+
+{
+    "userId": "62208ded0807a0241696b30c",
+	"title": "Roses",
+    "description": "Lorem ipsum Lorem Ipsum.",
+    "city": "Brześć",
+    "phoneNumber": "123234345",
+    "category": "623a4712db6477afcad4d52a",
+    "height": "623a411ad32b3e7b591c0679",
+    "price": 330,
+    "forExchange": false,
+    "photos": []
+}
+
+###
+# get all offers
+GET http://localhost:3000/offers
+
+
+###
+# update offer
+PUT http://localhost:3000/offers/62208ded0807a0241696b30c
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDczODY0NDcsImV4cCI6MjUxMTM4NjQ0N30.PmiBkkD6iFzT6Fw0PJkpggiQ05ttDJZw9L4LgiuP0q0
+Content-Type: application/json
+
+{
+  "title": "Kapusta"
+}

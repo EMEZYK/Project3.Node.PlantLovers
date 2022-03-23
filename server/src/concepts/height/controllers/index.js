@@ -3,9 +3,9 @@ import validateCreateHeight from "../model/HeightValidation.js";
 import { getAllHeights } from "../repositories/queries.js";
 
 export const createHeight = async (req, res) => {
-  const validationHeight = validateCreateHeight(req.body);
-  if (validationHeight.error) {
-    return res.status(400).send("Invalid data");
+  const { error } = validateCreateHeight(req.body);
+  if (error) {
+    return res.status(400).send(error.details[0].message);
   }
   try {
     await addNewHeight(req.body);

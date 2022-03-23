@@ -3,6 +3,7 @@ import { createOffer } from "../repositories/commands.js";
 export async function createNewOffer(body) {
   try {
     const offer = await createOffer({
+      userId: body.userId,
       title: body.title,
       description: body.description,
       city: body.city,

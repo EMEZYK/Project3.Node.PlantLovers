@@ -1,5 +1,5 @@
 import { getAllOffers } from "../repositories/queries.js";
 
 export const getOffers = async () => {
-  return await getAllOffers({}, 10, 10);
+  return await getAllOffers({}, 10, 0);
 };

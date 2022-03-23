@@ -1,7 +1,7 @@
 import { getOffers } from "../useCases/getOffers.js";
-import createNewOffer from "../useCases/createNewOffer";
-import validateCreateOffer from "../model/OfferValidation";
-import { updateOfferFunc } from "../useCases/updateOffer";
+import { createNewOffer } from "../useCases/createNewOffer.js";
+import validateCreateOffer from "../model/OfferValidation.js";
+import { updateOfferFunc } from "../useCases/updateOffer.js";
 import jwt from "jsonwebtoken";
 
 export const getAllOffers = async (req, res) => {
@@ -14,9 +14,9 @@ export const getAllOffers = async (req, res) => {
 };
 
 export const createOffer = async (req, res) => {
-  const validationOffer = validateCreateOffer(req.body);
-  if (validationOffer.error) {
-    return res.status(400).send("Invalid data");
+  const { error } = validateCreateOffer(req.body);
+  if (error) {
+    return res.status(400).send(error.details[0].message);
   }
   try {
     await createNewOffer(req.body);

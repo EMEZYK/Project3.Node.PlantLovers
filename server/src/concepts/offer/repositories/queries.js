@@ -1,4 +1,4 @@
-import Offer from "../model/Offer";
+import Offer from "../model/Offer.js";
 
 export async function getOffer(offerId) {
   const offer = await Offer.findById(offerId);
