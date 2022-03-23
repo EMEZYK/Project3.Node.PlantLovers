@@ -2,6 +2,7 @@ import Joi from "joi-oid";
 
 const validateCreateOffer = (offer) => {
   const schema = Joi.object({
+    userID: Joi.objectId().optional(),
     title: Joi.string().min(3).max(50).required(),
 
     description: Joi.string().max(500).required(),

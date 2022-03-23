@@ -1,7 +1,7 @@
-import { updateOffer } from "../repositories/commands";
-import sendEmail from "../../../services/mail";
-import Offer from "../model/Offer";
-import User from "../../user/model/User";
+import { updateOffer } from "../repositories/commands.js";
+import sendEmail from "../../../services/mail/index.js";
+import Offer from "../model/Offer.js";
+import User from "../../user/model/User.js";
 
 export const updateOfferFunc = async (offerId, userId, data) => {
   const existingOffer = await Offer.findById(offerId);

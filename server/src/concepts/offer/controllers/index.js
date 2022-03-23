@@ -1,7 +1,7 @@
 import { getOffers } from "../useCases/getOffers.js";
-import createNewOffer from "../useCases/createNewOffer";
-import validateCreateOffer from "../model/OfferValidation";
-import { updateOfferFunc } from "../useCases/updateOffer";
+import { createNewOffer } from "../useCases/createNewOffer.js";
+import validateCreateOffer from "../model/OfferValidation.js";
+import { updateOfferFunc } from "../useCases/updateOffer.js";
 import jwt from "jsonwebtoken";
 
 export const getAllOffers = async (req, res) => {
