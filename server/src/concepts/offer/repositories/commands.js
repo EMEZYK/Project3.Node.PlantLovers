@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
-import Offer from "../model/Offer";
+import Offer from "../model/Offer.js";
 
-const createOffer = async (data) => {
+export const createOffer = async (data) => {
   const newOffer = new Offer({
     ...data,
   });
@@ -14,12 +14,10 @@ const createOffer = async (data) => {
   }
 };
 
-const deleteOffer = async (offerId) => {
+export const deleteOffer = async (offerId) => {
   return await Offer.deleteOne({ _id: offerId });
 };
 
-const updateOffer = async (filter, data) => {
+export const updateOffer = async (filter, data) => {
   return await Offer.updateOne(filter, data);
 };
-
-export { createOffer, deleteOffer, updateOffer } from "commands";
