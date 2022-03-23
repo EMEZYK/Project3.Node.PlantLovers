@@ -16,6 +16,7 @@ export const createHashedPassword = async (password) => {
 };
 
 const notifyUser = (user) => {
+  console.log(generateToken(user, 3600000));
   const emailData = {
     to: user.email,
     html: pug.renderFile(
@@ -23,7 +24,6 @@ const notifyUser = (user) => {
       {
         email: user.email,
         token: generateToken(user, 3600000),
-        id: user._id,
       }
     ),
     subject: "Account created - confirmation",
@@ -47,6 +47,7 @@ export const createNewUser = async (body) => {
   const createdUser = await createUser(verifiedUser);
 
   notifyUser(createdUser);
+  console.log(createdUser);
 
   return createdUser;
 };
