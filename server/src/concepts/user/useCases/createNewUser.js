@@ -47,7 +47,6 @@ export const createNewUser = async (body) => {
   const createdUser = await createUser(verifiedUser);
 
   notifyUser(createdUser);
-  console.log(createdUser);
 
   return createdUser;
 };
