@@ -44,7 +44,7 @@ export const deleteOffer = async (req, res) => {
 
 export const activateOffer = async (req, res) => {
   try {
-    const activatedOffer = await activateOfferWithId(req.params.id, req.body);
+    const activatedOffer = await activateOfferWithId(req.params.id);
     if (!activatedOffer) {
       return res.status(404).send("There is no offer");
     }
@@ -59,7 +59,9 @@ export const activateOffer = async (req, res) => {
 
 export const archiveOffer = async (req, res) => {
   try {
-    const archivedOffer = await archiveOfferWithId(req.params.id, req.body);
+    const decoded = jwt.decode(req.headers.token);
+    const userId = decoded.sub;
+    const archivedOffer = await archiveOfferWithId(req.params.id, userId);
     if (!archivedOffer) {
       return res.status(404).send("There is no offer");
     }
@@ -71,23 +73,20 @@ export const archiveOffer = async (req, res) => {
 
 export const addView = async (req, res) => {
   try {
-    const viewAdded = await addOneView(req.params.id, req.body);
+    const viewAdded = await addOneView(req.params.id);
     if (!viewAdded) {
       return res.status(404).send("There is no offer");
     }
-    return res.status(200).send({
-      message: "View was added",
-      data: viewAdded.views,
-    });
+    return res.status(200).send("View was added");
   } catch (error) {
     return res.status(500).send(error.message);
   }
 };
 
 export const updateOffer = async (req, res) => {
-  const validationCheck = validateCreateOffer(req.body);
-  if (validationCheck.error) {
-    return res.status(400).send("Invalid data");
+  const { error } = validateCreateOffer(req.body);
+  if (error) {
+    return res.status(400).send(error.details[0].message);
   }
   try {
     const decoded = jwt.decode(req.headers.token);

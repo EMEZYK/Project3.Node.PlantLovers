@@ -22,26 +22,18 @@ export const updateOffer = async (filter, data) => {
   return await Offer.updateOne(filter, data);
 };
 
-export const activateOfferWithId = async (id, data) => {
-  const activatedOffer = {
-    ...data,
-    isActive: true,
-  };
-  return await Offer.updateOne(id, activatedOffer);
+export const activateOfferWithId = async (id) => {
+  return await Offer.findByIdAndUpdate(id, { isActivate: true });
 };
 
-export const archiveOfferWithId = async (id, data) => {
-  const archivedOffer = {
-    ...data,
-    isArchived: true,
-  };
-  return await Offer.updateOne(id, archivedOffer);
+export const archiveOfferWithId = async (id, userId) => {
+  const existingOffer = await Offer.findById(id);
+  if (existingOffer.userId !== userId) {
+    throw new Error("Access denied");
+  }
+  return await Offer.findByIdAndUpdate(id, { isArchived: true });
 };
 
-export const addOneView = async (id, data) => {
-  const addedView = {
-    ...data,
-    views: data.views + 1,
-  };
-  return await Offer.updateOne(id, addedView);
+export const addOneView = async (id) => {
+  return await Offer.updateOne({ _id: id }, { $inc: { views: 1 } });
 };
