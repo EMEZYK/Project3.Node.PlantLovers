@@ -5,7 +5,7 @@ POST http://localhost:3000/users/register
 Content-Type: application/json
 
 {
-    "email": "testmailone@mail.com",
+    "email": "testmailtwo@mail.com",
     "password": "12345678",
     "confirmPassword": "12345678"
 }
@@ -13,23 +13,22 @@ Content-Type: application/json
 ###
 # login
 POST http://localhost:3000/users/login
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MjNiMzU4YTcxMjU5Nzg4NDU4MGM5YWYiLCJyb2wiOmZhbHNlLCJpYXQiOjE2NDgwNDc0OTgsImV4cCI6MTY1MTY0NzQ5OH0.F7Ezo1yDDqRAfG_seir9zEmu6xtTDWtXSy9c0qtYybI
 Content-Type: application/json
 
 {
-    "email": "abcd@test.com",
-    "password": "987654321"
+    "email": "testmailtwo@mail.com",
+    "password": "12345678"
 }
 
 ###
 # update user
-PUT http://localhost:3000/users/621f32d82312944d93f5ff81
-token:
+PUT http://localhost:3000/users/62383c52f98524f57ba08a4b
+//POTRZEBNY TOKEN token
 Content-Type: application/json
 
 {
-    "password": "987654321",
-    "confirmPassword": "987654321",
-    "isActive": true
+    "city": "Kołobrzeg"
 }
 
 ###
@@ -95,10 +94,10 @@ GET http://localhost:3000/offers
 
 ###
 # update offer
-PUT http://localhost:3000/offers/:id
-token:
+PUT http://localhost:3000/offers/62208ded0807a0241696b30c
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDczODY0NDcsImV4cCI6MjUxMTM4NjQ0N30.PmiBkkD6iFzT6Fw0PJkpggiQ05ttDJZw9L4LgiuP0q0
 Content-Type: application/json
 
 {
-  
+  "title": "Kapusta"
 }
