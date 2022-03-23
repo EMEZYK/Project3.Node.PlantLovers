@@ -5,9 +5,9 @@ import { deleteUserWithId } from "../useCases/deleteUser.js";
 import { signInUserFunc } from "../useCases/signInUser.js";
 
 export const createUser = async (req, res) => {
-  const validationResult = validateCreateUser(req.body);
-  if (validationResult.error) {
-    return res.status(400).send("Invalid data");
+  const { error } = validateCreateUser(req.body);
+  if (error) {
+    return res.status(400).send(error.details[0].message);
   }
   try {
     const user = await createNewUser(req.body);

@@ -14,9 +14,9 @@ export const getAllOffers = async (req, res) => {
 };
 
 export const createOffer = async (req, res) => {
-  const validationOffer = validateCreateOffer(req.body);
-  if (validationOffer.error) {
-    return res.status(400).send("Invalid data");
+  const { error } = validateCreateOffer(req.body);
+  if (error) {
+    return res.status(400).send(error.details[0].message);
   }
   try {
     await createNewOffer(req.body);
