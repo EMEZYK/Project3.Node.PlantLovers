@@ -1,4 +1,14 @@
 # ____________________________ USERS ____________________________
+###
+# create users
+POST http://localhost:3000/users/register 
+Content-Type: application/json
+
+{
+    "email": "testmailone@mail.com",
+    "password": "12345678",
+    "confirmPassword": "12345678"
+}
 
 ###
 # login
@@ -6,19 +16,8 @@ POST http://localhost:3000/users/login
 Content-Type: application/json
 
 {
-    "email": "testmail@mail.com",
-    "password": "1234567"
-}
-
-###
-# create users
-POST http://localhost:3000/users/register 
-Content-Type: application/json
-
-{
-    "email": "testmail@mail.com",
-    "password": "12345678",
-    "confirmPassword": "12345678"
+    "email": "abcd@test.com",
+    "password": "987654321"
 }
 
 ###
@@ -28,8 +27,9 @@ token:
 Content-Type: application/json
 
 {
-    "password": "123458ujj8",
-    "confirmPassword": "123458ujj8"
+    "password": "987654321",
+    "confirmPassword": "987654321",
+    "isActive": true
 }
 
 ###
@@ -43,10 +43,11 @@ Content-Type: application/json
 # ____________________________ CATEGORIES____________________________
 # create category
 POST http://localhost:3000/categories
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDczODY0NDcsImV4cCI6MjUxMTM4NjQ0N30.PmiBkkD6iFzT6Fw0PJkpggiQ05ttDJZw9L4LgiuP0q0
 Content-Type: application/json
 
 {
-	"name": "shrubs"
+	"name": "trees"
 }
 
 ###
@@ -70,18 +71,34 @@ GET http://localhost:3000/heights
 ###
 # ____________________________ OFFERS____________________________
 # create offer
-POST http://localhost:3000/
+POST http://localhost:3000/offers
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDczODY0NDcsImV4cCI6MjUxMTM4NjQ0N30.PmiBkkD6iFzT6Fw0PJkpggiQ05ttDJZw9L4LgiuP0q0
 Content-Type: application/json
 
 {
-	"title": "Plantssss",
-    "description": "Lorem ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    "city": "Sanok",
-    "phoneNumber": "983743783"
+    "userId": "62208ded0807a0241696b30c",
+	"title": "Roses",
+    "description": "Lorem ipsum Lorem Ipsum.",
+    "city": "Brześć",
+    "phoneNumber": "123234345",
+    "category": "623a4712db6477afcad4d52a",
+    "height": "623a411ad32b3e7b591c0679",
+    "price": 330,
+    "forExchange": false,
+    "photos": []
 }
 
 ###
 # get all offers
-GET http://localhost:3000/
+GET http://localhost:3000/offers
 
 
+###
+# update offer
+PUT http://localhost:3000/offers/:id
+token:
+Content-Type: application/json
+
+{
+  
+}
