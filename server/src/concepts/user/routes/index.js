@@ -15,7 +15,7 @@ const router = express.Router();
 
 router.post("/register", createUser);
 router.put("/:id", isThatUser, updateUser);
-router.put("/activate/:id", activateAccount);
+router.get("/activate/:token/:{id}", isThatUser, activateAccount);
 router.delete("/:id", isThatUserOrAdmin, deleteUser);
 router.post("/login", loginUser);
 

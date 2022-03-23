@@ -23,6 +23,7 @@ const notifyUser = (user) => {
       {
         email: user.email,
         token: generateToken(user, 3600000),
+        id: user._id,
       }
     ),
     subject: "Account created - confirmation",
