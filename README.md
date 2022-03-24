@@ -98,8 +98,6 @@ git clone https://github.com/Coderscamp-2021-2022-Lukasz-Kamil/Project3.Node.Pla
 
 ## Method: POST
 
----
-
 ### **/users/register**
 
 <br>
@@ -132,19 +130,21 @@ Response example:
 
 <br>
 
-If the provided data fails validation, the following message will be displayed: `Invalid data`
+If the provided data fails validation, the following messages will be displayed: 
+`"email" is required`
+`"email" must be a valid email`
+`"password" is required`
+`"password" length must be at least 6 characters long`
+
 <br>
 
 ## Method: POST
 
----
-
 ### **/users/login**
 
 <br>
-Login data for created user. Example body in that request:
 
-<br>
+Login data for created user. Example body in that request:
 
 ```json
 {
@@ -157,16 +157,15 @@ If the provided data are invalid, the following message will be displayed: `Inva
 
 [![Screenshot-4.png](https://i.postimg.cc/6QbVJDyT/Screenshot-4.png)](https://postimg.cc/2qvLn9df)
 
-## Method: POST
+<br>
 
----
+## Method: POST
 
 ### **/categories**
 
 <br>
-Create category. Only a user with admin permissions can add an category. Example body in that request:
 
-<br>
+Create category. Only an user with admin permissions can add an category. Example body in that request:
 
 ```json
 {
@@ -176,18 +175,20 @@ Create category. Only a user with admin permissions can add an category. Example
 
 [![Screenshot-5.png](https://i.postimg.cc/xd7QZ3VM/Screenshot-5.png)](https://postimg.cc/rdS70Wmw)
 
-If the provided data are invalid, the following message will be displayed: `Invalid data`. If category was created successfully: `Category created` and `Category already exist` if category exist.
+If the provided data are invalid, the following message will be displayed: `"name" is required`
+`"name" length must be at least 3 characters long` 
+`"name" length must be less than or equal to 30 characters long` 
+If category was created successfully: `Category created` and `Category already exist` if category exist.
+
+<br>
 
 ## Method: POST
-
----
 
 ### **/heights**
 
 <br>
-Create Height. Only a user with admin permissions can add an height range. Example body in that request:
 
-<br>
+Create Height. Only an user with admin permissions can add an height range. Example body in that request:
 
 ```json
 {
@@ -195,11 +196,14 @@ Create Height. Only a user with admin permissions can add an height range. Examp
 }
 ```
 
+If the provided data are invalid, the following message will be displayed: `"range" is required` 
+`"range" length must be at least 3 characters long` 
+`"range" length must be less than or equal to 7 characters long` 
 If height was created successfully: `Height added!` and `Height already exist` if height exist.
 
-## Method: POST
+<br>
 
----
+## Method: POST
 
 ### **/offers**
 
@@ -222,24 +226,55 @@ Create Offer. Example body in that request:
   "photos": []
 }
 ```
-
-If offer was created successfully: `Offer added!`.
+All of the above data are required. 
 Errors examples:
 If we don't add a title the an `"title" is required` error will be occured.
 If we provide an incorrect phone number, an error will appear `"phoneNumber" length must be at least 9 characters long`.
+
+If offer was created successfully: `Offer added!`.
 
 <br>
 
 ## Method: GET
 
----
+### **/users**
+
+<br>
+
+Fetching users from our database. Params are optional. Without them, API return all records, example of response:
+
+```json
+[
+	{
+		"_id": "623c270a90cc7892fef00065",
+		"email": "ewelinatest@gmail.com",
+		"password": "$2b$10$N4bpfPaPPtYXpDSodKcCQ.JLcg/f4sceDaNOGTPgF9BhYmSTrYkX.",
+		"isAdmin": true,
+		"isActive": true,
+		"favourites": []
+	},
+	{
+		"_id": "623cce216a1da7f950c8847b",
+		"email": "mareksrarek@mail.com",
+		"password": "$2b$10$0y50PTZ7EiL56ioUzSwM/O5xWeL1QFLF4El8cKz6RykmdVgd//iYW",
+		"isAdmin": true,
+		"isActive": true,
+		"favourites": [],
+		"city": "Kraków"
+	}
+]
+```
+When there is no result for request, API will response with: `[]`
+
+<br>
+
+## Method: GET
 
 ### **/categories**
 
 <br>
-Fetching categories from our database. Params are optional. Without them, API return all records, example of response:
 
-<br>
+Fetching categories from our database. Params are optional. Without them, API return all records, example of response:
 
 ```json
 [
@@ -256,16 +291,16 @@ Fetching categories from our database. Params are optional. Without them, API re
   }
 ]
 ```
+When there is no result for request, API will response with: `[]`
 
 <br>
 
 ## Method: GET
 
----
-
 ### **/heights**
 
 <br>
+
 Fetching heights from our database. Example of response:
 
 <br>
@@ -284,12 +319,11 @@ Fetching heights from our database. Example of response:
   }
 ]
 ```
+When there is no result for request, API will response with: `[]`
 
 <br>
 
 ## Method: GET
-
----
 
 ### **/offers**
 
@@ -333,7 +367,18 @@ When there is no result for request, API will response with: `[]`
 
 ## Method: PUT
 
----
+### **/activate/:id**
+
+<br>
+
+Activate user. 
+To activate the user, you will need the token generated during registration and the user ID.
+If the activation was successful, a message will be displayed:
+`Your account has been activated`
+
+<br>
+
+## Method: PUT
 
 ### **/users/:id**
 
@@ -378,12 +423,35 @@ Response after update:
   }
 }
 ```
+To update the user, you will need a token generated during logging in and a user ID.
 
 <br>
 
 ## Method: PUT
 
----
+### **/users/admin/:id**
+
+<br>
+
+Add user permissions. 
+Only the user with administrator permissions grants administrator permissions to another user. You must specify the user ID.
+`User has been changed to Admin`
+
+<br>
+
+## Method: PUT
+
+### **/offers/activate/:id**
+
+<br>
+
+Offer activation.
+The offer can only be activated by a user with administrator permissions. You must specify the offer ID.
+`User has been changed to Admin`
+
+<br>
+
+## Method: PUT
 
 ### **/offers/:id**
 
@@ -431,14 +499,48 @@ Response after update:
 
 <br>
 
+## Method: PUT
+
+### **/offers/archive/:id**
+
+<br>
+
+Archiving the offer.
+The offer can be archived by a user with administrator permissions or by a user if it is activated. You must provide an Offer ID.
+`Offer was archived!`
+
+<br>
+
+## Method: PUT
+
+### **/offers/view/:id**
+
+<br>
+
+Views counting.
+To add a view you must specify the offer ID.
+`View was added`
+
 <br>
 
 ## Method: DELETE
-
----
 
 ### **/users/:id**
 
 <br>
 
-Delete user. Only a user with admin permissions can delete a user.
+Delete user. 
+The user can be deleted by the user with administrator permissions or by the user himself.
+`User with 623ccd9320dc69894616a74f was deleted`
+
+<br>
+
+## Method: DELETE
+
+### **/offers/:id**
+
+<br>
+
+Delete offer. 
+The offer can be deleted by the user with administrator permissions or by the user himself.
+`Offer with 623ccf6f7ff9b58347959a8b was deleted`
