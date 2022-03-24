@@ -4,7 +4,7 @@ import { generateToken } from "../../authorization/controllers/auth.js";
 
 export const signInUserFunc = async (email, password) => {
   const user = await User.findOne({ email: email })
-    .select("email active password")
+    .select("email isActive password")
     .exec();
 
   if (!user) {
@@ -16,8 +16,8 @@ export const signInUserFunc = async (email, password) => {
   if (!matchPassword) {
     throw new Error("Invalid email or password");
   }
-  if (!user.active) throw new Error(`You have to activate your account`);
+  if (!user.isActive) throw new Error(`You have to activate your account`);
 
-  const token = generateToken(user);
+  const token = generateToken(user, 3600000);
   return token;
 };
