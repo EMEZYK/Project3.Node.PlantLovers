@@ -28,7 +28,7 @@ export const activateOfferWithId = async (id) => {
 
 export const archiveOfferWithId = async (id, userId) => {
   const existingOffer = await Offer.findById(id);
-  if (existingOffer.userId !== userId) {
+  if (existingOffer.userId.toString() !== userId) {
     throw new Error("Access denied");
   }
   return await Offer.findByIdAndUpdate(id, { isArchived: true });
