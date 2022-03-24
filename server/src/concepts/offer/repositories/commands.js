@@ -23,7 +23,7 @@ export const updateOffer = async (filter, data) => {
 };
 
 export const activateOfferWithId = async (id) => {
-  return await Offer.findByIdAndUpdate(id, { isActivate: true });
+  return await Offer.findByIdAndUpdate(id, { isActive: true });
 };
 
 export const archiveOfferWithId = async (id, userId) => {
