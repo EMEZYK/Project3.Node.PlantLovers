@@ -27,9 +27,9 @@ export const createOffer = async (req, res) => {
 };
 
 export const updateOffer = async (req, res) => {
-  const validationCheck = validateCreateOffer(req.body);
-  if (validationCheck.error) {
-    return res.status(400).send("Invalid data");
+  const { error } = validateCreateOffer(req.body);
+  if (error) {
+    return res.status(400).send(error.details[0].message);
   }
   try {
     const decoded = jwt.decode(req.headers.token);

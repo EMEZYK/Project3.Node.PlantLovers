@@ -5,6 +5,8 @@ import {
   loginUser,
   activateAccount,
   makeUserAnAdmin,
+  getOneUser,
+  getUsers,
 } from "../controllers/index.js";
 import {
   isThatUser,
@@ -21,5 +23,7 @@ router.put("/activate/:id", isThatUser, activateAccount);
 router.delete("/:id", isThatUserOrAdmin, deleteUser);
 router.post("/login", loginUser);
 router.put("/admin/:id", isAdmin, makeUserAnAdmin);
+router.get("/:id", getOneUser);
+router.get("/", getUsers);
 
 export default router;
