@@ -112,7 +112,6 @@ export const getOneUser = async (req, res) => {
 export const getUsers = async (req, res) => {
   try {
     const allUsers = await getAllUsers();
-    if (!allUsers) return res.status(404).send("No user found!");
     return res.status(200).send(allUsers);
   } catch (error) {
     return res.status.send(500).send(error.message);
