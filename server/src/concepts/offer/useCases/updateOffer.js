@@ -8,7 +8,7 @@ export const updateOfferFunc = async (offerId, userId, data) => {
   if (!existingOffer) {
     throw new Error("Offer doesn't exists");
   }
-  if (existingOffer.userId !== userId) {
+  if (existingOffer.userId.toString() !== userId) {
     throw new Error("Access denied");
   }
   const user = await User.findById(userId);
@@ -18,5 +18,5 @@ export const updateOfferFunc = async (offerId, userId, data) => {
     subject: "Offer updated",
   };
   sendEmail(email);
-  return await updateOffer({ _id: offerId }, { data });
+  return await updateOffer({ _id: offerId }, data);
 };

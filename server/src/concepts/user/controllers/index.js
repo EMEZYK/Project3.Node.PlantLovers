@@ -80,3 +80,20 @@ export const activateAccount = async (req, res) => {
     return res.status(500).send("Account couldn't be activated");
   }
 };
+
+export const makeUserAnAdmin = async (req, res) => {
+  const user = await User.findById(req.params.id);
+  if (!user) {
+    return res.status(404).send("There is no user");
+  }
+  user.set({
+    isAdmin: true,
+  });
+
+  try {
+    await user.save();
+    res.status(200).send("User has been changed to Admin");
+  } catch (err) {
+    return res.status(500).send("User couldn't be changed to Admin");
+  }
+};
