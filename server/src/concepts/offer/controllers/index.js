@@ -4,11 +4,12 @@ import {
   archiveOfferWithId,
   addOneView,
 } from "../repositories/commands.js";
-import createNewOffer from "../useCases/createNewOffer";
-import deleteOfferWithId from "../useCases/deleteOfferWithId";
+import { createNewOffer } from "../useCases/createNewOffer.js";
+import { deleteOfferWithId } from "../useCases/deleteOffer.js";
 import validateCreateOffer from "../model/OfferValidation.js";
 import { updateOfferFunc } from "../useCases/updateOffer.js";
 import jwt from "jsonwebtoken";
+import { getOffer } from "../repositories/queries.js";
 
 export const getAllOffers = async (req, res) => {
   try {
@@ -16,6 +17,16 @@ export const getAllOffers = async (req, res) => {
     return res.status(200).send(offers);
   } catch (error) {
     return res.status(500).send(error.message);
+  }
+};
+
+export const getOneOffer = async (req, res) => {
+  try {
+    const offer = await getOffer(req.params.id);
+    if (!offer) return res.status(404).send("No offer found!");
+    return res.status(200).send(offer);
+  } catch (error) {
+    return res.status.send(500).send(error.message);
   }
 };
 
