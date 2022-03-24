@@ -4,6 +4,7 @@ import { createNewUser } from "../useCases/createNewUser.js";
 import { updateUserFunc } from "../useCases/updateUser.js";
 import { deleteUserWithId } from "../useCases/deleteUser.js";
 import { signInUserFunc } from "../useCases/signInUser.js";
+import { getUser, getAllUsers } from "../repositories/queries.js";
 
 export const createUser = async (req, res) => {
   const { error } = validateCreateUser(req.body);
@@ -95,5 +96,25 @@ export const makeUserAnAdmin = async (req, res) => {
     res.status(200).send("User has been changed to Admin");
   } catch (err) {
     return res.status(500).send("User couldn't be changed to Admin");
+  }
+};
+
+export const getOneUser = async (req, res) => {
+  try {
+    const user = await getUser(req.params.id);
+    if (!user) return res.status(404).send("No user found!");
+    return res.status(200).send(user);
+  } catch (error) {
+    return res.status.send(500).send(error.message);
+  }
+};
+
+export const getUsers = async (req, res) => {
+  try {
+    const allUsers = await getAllUsers();
+    if (!allUsers) return res.status(404).send("No user found!");
+    return res.status(200).send(allUsers);
+  } catch (error) {
+    return res.status.send(500).send(error.message);
   }
 };
