@@ -1,5 +1,4 @@
 import { createOffer } from "../repositories/commands.js";
-import { generateToken } from "../../authorization/controllers/auth.js";
 import sendEmail from "../../../services/mail/index.js";
 import pug from "pug";
 import path, { dirname } from "path";
@@ -9,14 +8,12 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const notifyUserAboutOffer = (user, offer) => {
-  console.log(generateToken(user, 3600000));
   const emailData = {
     to: user.email,
     html: pug.renderFile(
       path.resolve(__dirname, "../../../../views/offer.pug"),
       {
         email: user.email,
-        token: generateToken(user, 3600000),
         title: offer.title,
       }
     ),
