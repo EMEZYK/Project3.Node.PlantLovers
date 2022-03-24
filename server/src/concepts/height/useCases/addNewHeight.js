@@ -2,7 +2,7 @@ import createHeight from "../repositories/commands.js";
 import { findHeightByValue } from "../repositories/queries.js";
 
 const addNewHeight = async (data) => {
-  const existingHeight = await findHeightByValue(data.name);
+  const existingHeight = await findHeightByValue(data.range);
   if (existingHeight) {
     throw new Error("Height already exist");
   }
