@@ -4,7 +4,7 @@ import { generateToken } from "../../authorization/controllers/auth.js";
 
 export const signInUserFunc = async (email, password) => {
   const user = await User.findOne({ email: email })
-    .select("email isActive password")
+    .select("email isAdmin isActive password")
     .exec();
 
   if (!user) {
