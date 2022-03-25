@@ -241,7 +241,7 @@ If offer was created successfully: `Offer added!`.
 
 <br>
 
-Fetching users from our database. Params are optional. Without them, API return all records, example of response:
+Fetching users from our database. API return all records, example of response:
 
 ```json
 [
