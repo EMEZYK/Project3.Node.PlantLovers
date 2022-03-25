@@ -274,7 +274,7 @@ When there is no result for request, API will response with: `[]`
 
 <br>
 
-Fetching categories from our database. Params are optional. Without them, API return all records, example of response:
+Fetching categories from our database. API return all records, example of response:
 
 ```json
 [
