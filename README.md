@@ -1,6 +1,7 @@
 # PlantLovers Application by K&Ł Group
 
-Link to the newest version: https://plant-lovers.herokuapp.com
+Link to the frontend version: https://celadon-empanada-d254d2.netlify.app/ 
+Link to the backend version: https://plant-lovers.herokuapp.com
 
 ## Team:
 
